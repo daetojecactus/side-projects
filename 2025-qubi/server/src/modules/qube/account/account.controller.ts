@@ -23,7 +23,7 @@ export class AccountController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: number) {
     return this.accountService.findOne({ id });
   }
 
@@ -33,12 +33,12 @@ export class AccountController {
   }
 
   @Put(':id')
-  async updateOne(@Param('id') id: string, @Body() dto: UpdateAccountDto) {
+  async updateOne(@Param('id') id: number, @Body() dto: UpdateAccountDto) {
     return this.accountService.updateOne({ id }, dto);
   }
 
   @Delete(':id')
-  async deleteOne(@Param('id') id: string) {
+  async deleteOne(@Param('id') id: number) {
     await this.accountService.deleteOne({ id });
     return;
   }

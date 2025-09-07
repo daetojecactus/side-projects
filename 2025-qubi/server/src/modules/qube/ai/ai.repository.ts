@@ -7,7 +7,7 @@ import { AiApiClient } from './ai.client';
 export class AiRepository {
   constructor(private readonly aiApiClient: AiApiClient) {}
 
-  async sendRequest(aiRequest: AiRequestDto): Promise<any> {
+  async executeAiOperation(aiRequest: AiRequestDto): Promise<any> {
     const response = await this.aiApiClient.instance.post('/responses', {
       model: 'gpt-4o-mini',
       input: aiRequest.prompt,

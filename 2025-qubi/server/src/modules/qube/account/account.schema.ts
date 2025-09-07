@@ -1,11 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 import { AccountStatus } from './account.interface';
+import { autoIncrement } from 'mongoose-plugin-autoinc';
 
 @Schema({ collection: 'account', timestamps: true })
 export class Account {
-  @Prop({ required: true, unique: true })
-  id!: string;
+  @Prop({ unique: true, immutable: true })
+  id!: number;
 
   @Prop({ required: true })
   password!: string;
@@ -15,6 +16,9 @@ export class Account {
 
   @Prop({ required: true })
   lastName!: string;
+
+  @Prop({ required: true, default: 0 })
+  balance!: number;
 
   @Prop({ required: true })
   email!: string;
@@ -34,3 +38,11 @@ export class Account {
 
 export type AccountDocument = HydratedDocument<Account>;
 export const AccountSchema = SchemaFactory.createForClass(Account);
+
+AccountSchema.plugin(autoIncrement, {
+  model: 'Account',
+  field: 'id',
+  startAt: 1000,
+  incrementBy: 1,
+  unique: true,
+});

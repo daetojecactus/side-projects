@@ -1,10 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { AccountRepository } from './account.repository';
 import { Account } from './account.schema';
 import { OmitTimestamps } from 'src/helpers/omit-timestamps';
 import { CryptoService } from '../crypto/crypto.service';
 import { CreateAccountDto } from './dto/account-create.dto';
-import { AccountStatus } from './account.interface';
 
 @Injectable()
 export class AccountService {
@@ -22,13 +21,9 @@ export class AccountService {
   }
 
   async create(dto: CreateAccountDto) {
-    const account: OmitTimestamps<Account> = {
-      ...dto,
-      status: AccountStatus.ACTIVE,
-    };
-    account.password = await this.cryptoService.hashPassword(account.password);
+    dto.password = await this.cryptoService.hashPassword(dto.password);
 
-    return this.accountRepository.create(account);
+    return this.accountRepository.create(dto);
   }
 
   async updateOne(

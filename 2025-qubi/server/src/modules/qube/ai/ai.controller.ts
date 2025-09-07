@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Post, Req, UseGuards } from '@nestjs/common';
 import { AiService } from './ai.service';
 import { AiRequestDto } from './ai.dto';
 import { JwtPublicAuthGuard } from '../auth-public/jwt-public-auth.guard';
@@ -9,7 +9,7 @@ export class AiController {
 
   @UseGuards(JwtPublicAuthGuard)
   @Post('request')
-  async sendRequest(@Body() aiRequest: AiRequestDto) {
-    return this.aiService.sendRequest(aiRequest);
+  async executeAiOperation(@Body() aiRequest: AiRequestDto, @Req() req) {
+    return this.aiService.executeAiOperation(aiRequest, req.user.id);
   }
 }

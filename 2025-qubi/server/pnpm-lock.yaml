@@ -56,6 +56,9 @@ importers:
       mongoose:
         specifier: ^8.18.0
         version: 8.18.0
+      mongoose-plugin-autoinc:
+        specifier: ^1.1.9
+        version: 1.1.9(mongoose@8.18.0)
       nanoid:
         specifier: ^5.1.5
         version: 5.1.5
@@ -2905,6 +2908,11 @@ packages:
         optional: true
       socks:
         optional: true
+
+  mongoose-plugin-autoinc@1.1.9:
+    resolution: {integrity: sha512-DCkXJjgdQhMJCoRd1xwgKUQCOb/VgC8t3ewZ3+0GNCqCdYD1nxIdnvecO1IWh3ER8KINL98A0b97DgRVwOMxsg==}
+    peerDependencies:
+      mongoose: '>=4.0.0 || >=5.0.0'
 
   mongoose@8.18.0:
     resolution: {integrity: sha512-3TixPihQKBdyaYDeJqRjzgb86KbilEH07JmzV8SoSjgoskNTpa6oTBmDxeoF9p8YnWQoz7shnCyPkSV/48y3yw==}
@@ -7193,6 +7201,10 @@ snapshots:
       '@mongodb-js/saslprep': 1.3.0
       bson: 6.10.4
       mongodb-connection-string-url: 3.0.2
+
+  mongoose-plugin-autoinc@1.1.9(mongoose@8.18.0):
+    dependencies:
+      mongoose: 8.18.0
 
   mongoose@8.18.0:
     dependencies:

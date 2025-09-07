@@ -12,7 +12,7 @@ export class AuthPublicService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async validateAccount(id: string, password: string) {
+  async validateAccount(id: number, password: string) {
     const account = await this.accountService.findOne({ id });
     if (!account) return null;
     const valid = await this.cryptoService.comparePasswords(
@@ -22,7 +22,7 @@ export class AuthPublicService {
     return valid ? account : null;
   }
 
-  async login(dto: AuthPublicLoginDto) {
+  async loginPublic(dto: AuthPublicLoginDto) {
     const account = await this.validateAccount(dto.id, dto.password);
     if (!account) throw new UnauthorizedException('Invalid credentials');
 

@@ -4,6 +4,7 @@ import { Model } from 'mongoose';
 import { Account, AccountDocument } from './account.schema';
 import { OmitTimestamps } from 'src/helpers/omit-timestamps';
 import { AccountMessages } from './constants/account-messages';
+import { CreateAccountDto } from './dto/account-create.dto';
 
 @Injectable()
 export class AccountRepository {
@@ -20,8 +21,8 @@ export class AccountRepository {
     return await this.accountModel.find(filter ?? {});
   }
 
-  async create(Account: OmitTimestamps<Account>) {
-    return await this.accountModel.create(Account);
+  async create(account: CreateAccountDto) {
+    return await this.accountModel.create(account);
   }
 
   async updateOne(
@@ -30,7 +31,7 @@ export class AccountRepository {
   ) {
     const account = await this.accountModel.findOneAndUpdate(
       filter,
-      partialAccount,
+      { $set: partialAccount },
       {
         new: true,
       },

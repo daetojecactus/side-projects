@@ -4,9 +4,10 @@ import { AiService } from './ai.service';
 import { AiController } from './ai.controller';
 import { AiApiClient } from './ai.client';
 import { OutputFilterModule } from '../output-filter/output-filter.module';
+import { BillingModule } from '../billing/billing.module';
 
 @Module({
-  imports: [OutputFilterModule],
+  imports: [BillingModule, OutputFilterModule],
   controllers: [AiController],
   providers: [AiRepository, AiService, AiApiClient],
   exports: [AiService],

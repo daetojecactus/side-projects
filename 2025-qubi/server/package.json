@@ -36,6 +36,7 @@
     "dompurify": "^3.2.6",
     "jsdom": "^26.1.0",
     "mongoose": "^8.18.0",
+    "mongoose-plugin-autoinc": "^1.1.9",
     "nanoid": "^5.1.5",
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.2.2",

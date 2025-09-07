@@ -8,6 +8,6 @@ export class AuthPublicController {
 
   @Post('login')
   async login(@Body() dto: AuthPublicLoginDto) {
-    return this.authPublicService.login(dto);
+    return this.authPublicService.loginPublic(dto);
   }
 }

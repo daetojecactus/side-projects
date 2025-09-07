@@ -1,4 +1,4 @@
 export class AuthPublicLoginDto {
-  id: string;
+  id: number;
   password: string;
 }
