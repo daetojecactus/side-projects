@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { OmitTimestamps } from 'src/helpers/omit-timestamps';
 import { Admin, AdminDocument } from './admin.schema';
 import { AdminMessages } from './constants/admin-messages';
-import { CreateAdminDto } from './dto/admin-create.dto';
+import { AdminCreateDto } from './dto/admin-create.dto';
 
 @Injectable()
 export class AdminRepository {
@@ -21,7 +21,7 @@ export class AdminRepository {
     return await this.adminModel.find(filter ?? {});
   }
 
-  async create(admin: CreateAdminDto) {
+  async create(admin: AdminCreateDto) {
     return await this.adminModel.create(admin);
   }
 

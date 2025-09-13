@@ -14,7 +14,7 @@ export class TransactionService {
     return await this.transactionRepository.create(transaction);
   }
 
-  async findByAccount(accountId: string) {
+  async findByAccount(accountId: number) {
     return this.transactionRepository.find({ accountId });
   }
 }

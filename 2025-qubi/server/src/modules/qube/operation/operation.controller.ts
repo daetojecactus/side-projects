@@ -10,9 +10,9 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { OperationService } from './operation.service';
-import { CreateOperationDto } from './dto/create-operation.dto';
+import { OperationCreateDto } from './dto/operation-create.dto';
 import { Operation } from './operation.schema';
-import { UpdateOperationDto } from './dto/update-operation.dto';
+import { OperationUpdateDto } from './dto/operation-update.dto';
 import { JwtCorpAuthGuard } from '../auth-corp/jwt-corp-auth.guard';
 
 @Controller('operation')
@@ -21,7 +21,7 @@ export class OperationController {
 
   @UseGuards(JwtCorpAuthGuard)
   @Post()
-  async create(@Body() dto: CreateOperationDto) {
+  async create(@Body() dto: OperationCreateDto) {
     return this.operationService.create(dto);
   }
 
@@ -39,7 +39,7 @@ export class OperationController {
 
   @UseGuards(JwtCorpAuthGuard)
   @Put(':code')
-  async update(@Param('code') code: string, @Body() dto: UpdateOperationDto) {
+  async update(@Param('code') code: string, @Body() dto: OperationUpdateDto) {
     return this.operationService.updateOne({ code }, dto);
   }
 

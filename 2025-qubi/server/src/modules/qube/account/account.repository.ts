@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { Account, AccountDocument } from './account.schema';
 import { OmitTimestamps } from 'src/helpers/omit-timestamps';
 import { AccountMessages } from './constants/account-messages';
-import { CreateAccountDto } from './dto/account-create.dto';
+import { AccountCreateDto } from './dto/account-create.dto';
 
 @Injectable()
 export class AccountRepository {
@@ -21,7 +21,7 @@ export class AccountRepository {
     return await this.accountModel.find(filter ?? {});
   }
 
-  async create(account: CreateAccountDto) {
+  async create(account: AccountCreateDto) {
     return await this.accountModel.create(account);
   }
 

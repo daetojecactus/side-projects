@@ -1,6 +1,6 @@
 import { AccountStatus } from '../account.interface';
 
-export class UpdateAccountDto {
+export class AccountUpdateDto {
   password?: string;
   firstName?: string;
   lastName?: string;

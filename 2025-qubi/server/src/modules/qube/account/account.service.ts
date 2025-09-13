@@ -3,7 +3,7 @@ import { AccountRepository } from './account.repository';
 import { Account } from './account.schema';
 import { OmitTimestamps } from 'src/helpers/omit-timestamps';
 import { CryptoService } from '../crypto/crypto.service';
-import { CreateAccountDto } from './dto/account-create.dto';
+import { AccountCreateDto } from './dto/account-create.dto';
 
 @Injectable()
 export class AccountService {
@@ -20,7 +20,7 @@ export class AccountService {
     return this.accountRepository.find(filter);
   }
 
-  async create(dto: CreateAccountDto) {
+  async create(dto: AccountCreateDto) {
     dto.password = await this.cryptoService.hashPassword(dto.password);
 
     return this.accountRepository.create(dto);

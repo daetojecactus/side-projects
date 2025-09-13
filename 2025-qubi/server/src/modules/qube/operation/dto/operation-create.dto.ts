@@ -1,4 +1,4 @@
-export class CreateOperationDto {
+export class OperationCreateDto {
   code: string;
   name: string;
   description?: string;

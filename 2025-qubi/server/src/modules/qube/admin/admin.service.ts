@@ -3,7 +3,7 @@ import { OmitTimestamps } from 'src/helpers/omit-timestamps';
 import { CryptoService } from '../crypto/crypto.service';
 import { AdminRepository } from './admin.repository';
 import { Admin } from './admin.schema';
-import { CreateAdminDto } from './dto/admin-create.dto';
+import { AdminCreateDto } from './dto/admin-create.dto';
 import { AdminStatus } from './admin.interface';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class AdminService {
     return this.adminRepository.find(filter);
   }
 
-  async create(dto: CreateAdminDto) {
+  async create(dto: AdminCreateDto) {
     dto.password = await this.cryptoService.hashPassword(dto.password);
 
     return this.adminRepository.create(dto);

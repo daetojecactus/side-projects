@@ -11,8 +11,8 @@ import {
 } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { Admin } from './admin.schema';
-import { CreateAdminDto } from './dto/admin-create.dto';
-import { UpdateAdminDto } from './dto/admin-update.dto';
+import { AdminCreateDto } from './dto/admin-create.dto';
+import { AdminUpdateDto } from './dto/admin-update.dto';
 import { JwtCorpAuthGuard } from '../auth-corp/jwt-corp-auth.guard';
 
 @Controller('admin')
@@ -32,13 +32,13 @@ export class AdminController {
 
   @UseGuards(JwtCorpAuthGuard)
   @Post()
-  async create(@Body() dto: CreateAdminDto) {
+  async create(@Body() dto: AdminCreateDto) {
     return this.adminService.create(dto);
   }
 
   @UseGuards(JwtCorpAuthGuard)
   @Put(':id')
-  async updateOne(@Param('id') id: number, @Body() dto: UpdateAdminDto) {
+  async updateOne(@Param('id') id: number, @Body() dto: AdminUpdateDto) {
     return this.adminService.updateOne({ id }, dto);
   }
 

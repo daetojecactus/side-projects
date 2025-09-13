@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { OmitTimestamps } from 'src/helpers/omit-timestamps';
 import { OperationRepository } from './operation.repository';
 import { Operation } from './operation.schema';
-import { CreateOperationDto } from './dto/create-operation.dto';
+import { OperationCreateDto } from './dto/operation-create.dto';
 
 @Injectable()
 export class OperationService {
@@ -16,7 +16,7 @@ export class OperationService {
     return this.operationRepository.find(filter);
   }
 
-  create(dto: CreateOperationDto) {
+  create(dto: OperationCreateDto) {
     return this.operationRepository.create(dto);
   }
 

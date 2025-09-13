@@ -10,8 +10,8 @@ import {
 } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { Account } from './account.schema';
-import { CreateAccountDto } from './dto/account-create.dto';
-import { UpdateAccountDto } from './dto/account-update.dto';
+import { AccountCreateDto } from './dto/account-create.dto';
+import { AccountUpdateDto } from './dto/account-update.dto';
 
 @Controller('account')
 export class AccountController {
@@ -28,12 +28,12 @@ export class AccountController {
   }
 
   @Post()
-  async create(@Body() dto: CreateAccountDto) {
+  async create(@Body() dto: AccountCreateDto) {
     return this.accountService.create(dto);
   }
 
   @Put(':id')
-  async updateOne(@Param('id') id: number, @Body() dto: UpdateAccountDto) {
+  async updateOne(@Param('id') id: number, @Body() dto: AccountUpdateDto) {
     return this.accountService.updateOne({ id }, dto);
   }
 

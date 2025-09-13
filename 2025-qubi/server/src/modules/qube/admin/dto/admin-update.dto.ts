@@ -1,6 +1,6 @@
 import { AdminStatus } from '../admin.interface';
 
-export class UpdateAdminDto {
+export class AdminUpdateDto {
   password?: string;
   firstName?: string;
   lastName?: string;

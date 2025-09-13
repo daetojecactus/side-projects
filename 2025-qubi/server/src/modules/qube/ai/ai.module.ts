@@ -8,8 +8,8 @@ import { BillingModule } from '../billing/billing.module';
 
 @Module({
   imports: [BillingModule, OutputFilterModule],
-  controllers: [AiController],
   providers: [AiRepository, AiService, AiApiClient],
+  controllers: [AiController],
   exports: [AiService],
 })
 export class AiModule {}
