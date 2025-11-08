@@ -1,4 +1,4 @@
-# qube app
+# qubi app
 
 ### Backend (REST API)
 

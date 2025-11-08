@@ -1,1 +1,1 @@
-qube server
+qubi server

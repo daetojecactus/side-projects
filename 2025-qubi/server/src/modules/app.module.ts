@@ -1,13 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './database/database.module';
-import { QubeModule } from './qube/qube.module';
+import { QubiModule } from './qubi/qubi.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     DatabaseModule,
-    QubeModule,
+    QubiModule,
   ],
 })
 export class AppModule {}

@@ -4,14 +4,14 @@ import axios, { AxiosInstance } from 'axios';
 import axiosRetry from 'axios-retry';
 
 @Injectable()
-export class AiApiClient {
+export class OpenAiApiClient {
   private readonly client: AxiosInstance;
 
   constructor(configService: ConfigService) {
     this.client = axios.create({
-      baseURL: configService.get<string>('AI_API_URL'),
+      baseURL: configService.get<string>('OPENAI_API_URL'),
       headers: {
-        Authorization: `Bearer ${configService.get<string>('AI_API_TOKEN')}`,
+        Authorization: `Bearer ${configService.get<string>('OPENAI_API_TOKEN')}`,
         'Content-Type': 'application/json',
       },
     });

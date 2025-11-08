@@ -5,6 +5,7 @@ import { CryptoModule } from '../crypto/crypto.module';
 import { AdminModule } from '../admin/admin.module';
 import { AuthCorpService } from './auth-corp.service';
 import { JwtCorpStrategy } from './jwt-corp.strategy';
+import { AuthCorpController } from './auth-corp.controller';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { JwtCorpStrategy } from './jwt-corp.strategy';
     }),
   ],
   providers: [AuthCorpService, JwtCorpStrategy],
-  controllers: [AbortController],
+  controllers: [AuthCorpController],
   exports: [AuthCorpService, JwtModule],
 })
 export class AuthCorpModule {}
