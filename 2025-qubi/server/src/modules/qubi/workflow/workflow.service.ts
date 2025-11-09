@@ -41,7 +41,9 @@ export class WorkflowService {
 
   async execute(input: WorkflowRequestDto) {
     const filteredInput = await this.inputFilter.applyFilter(input);
-    const response = await this.aiService.send(filteredInput.text);
+    // const response = await this.aiService.sendOpenAi(filteredInput.text);
+    // const response = await this.aiService.sendAnthropic(filteredInput.text);
+    const response = await this.aiService.sendGemini(filteredInput.text);
 
     return await this.outputFilter.applyFilter(
       response,

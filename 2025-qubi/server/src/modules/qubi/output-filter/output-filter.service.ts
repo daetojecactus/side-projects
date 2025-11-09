@@ -17,7 +17,13 @@ export class OutputFilterService {
     console.log('Allowed image URLs count:', allowedImageUrls.length);
     console.log('First 3 allowed URLs:', allowedImageUrls.slice(0, 3));
 
-    let cleanHtml = sanitizeHtml(output, {
+    // Убираем markdown блоки кода ```html ... ```
+    const withoutMarkdown = this.cleanMarkdownCode(output);
+
+    // Извлекаем только HTML код, убирая комментарии AI после </html>
+    const extractedHtml = this.extractHtml(withoutMarkdown);
+
+    let cleanHtml = sanitizeHtml(extractedHtml, {
       ...SAFE_HTML_OPTIONS,
       exclusiveFilter: (frame) => {
         //удаляем style вне head
@@ -141,14 +147,37 @@ export class OutputFilterService {
   }
 
   private filterCssRules(css: string, allowedImageUrls: string[]): string {
-    //разбиваем на правила и фильтруем свойства
+    // Обрабатываем медиа-запросы отдельно
+    const mediaRegex = /@media[^{]+\{([\s\S]+?)\}\s*\}/g;
+    const mediaRules: string[] = [];
+
+    // Извлекаем медиа-запросы
+    css = css.replace(mediaRegex, (match, content) => {
+      const mediaQuery = match.substring(0, match.indexOf('{') + 1);
+      const rules = this.filterSimpleCssRules(content, allowedImageUrls);
+      if (rules) {
+        mediaRules.push(`${mediaQuery}${rules}}`);
+      }
+      return '';
+    });
+
+    // Обрабатываем обычные правила
+    const simpleRules = this.filterSimpleCssRules(css, allowedImageUrls);
+
+    return [...mediaRules, simpleRules].filter(Boolean).join('\n');
+  }
+
+  private filterSimpleCssRules(
+    css: string,
+    allowedImageUrls: string[],
+  ): string {
     return css
       .split('}')
       .map((rule) => {
         const [selector, props] = rule.split('{');
-        if (!props) return '';
+        if (!props || !selector) return '';
         const safeProps = this.filterInlineStyle(props, allowedImageUrls);
-        return safeProps ? `${selector}{${safeProps}}` : '';
+        return safeProps ? `${selector.trim()}{${safeProps}}` : '';
       })
       .filter(Boolean)
       .join('\n');
@@ -229,5 +258,24 @@ export class OutputFilterService {
 
     console.log('Final result:', isAllowed);
     return isAllowed;
+  }
+
+  private cleanMarkdownCode(text: string): string {
+    // Убираем markdown блоки кода ```html ... ``` или ```...```
+    return text.replace(/```html\n?|```\n?/g, '').trim();
+  }
+
+  private extractHtml(rawOutput: string): string {
+    // Ищем HTML код между <!DOCTYPE html> или <html> и </html>
+    const htmlMatch = rawOutput.match(
+      /<!DOCTYPE html>[\s\S]*?<\/html>|<html[\s\S]*?<\/html>/i,
+    );
+
+    if (htmlMatch) {
+      return htmlMatch[0];
+    }
+
+    // Если не найден полный HTML, возвращаем как есть
+    return rawOutput;
   }
 }

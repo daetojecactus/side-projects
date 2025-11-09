@@ -12,6 +12,7 @@ export const SAFE_CSS_PROPS = [
   'font-style',
   'text-align',
   'text-decoration',
+  'text-shadow',
   'line-height',
   'letter-spacing',
   'word-spacing',
@@ -47,8 +48,8 @@ export const SAFE_CSS_PROPS = [
   'overflow-y',
   'vertical-align',
   'box-shadow',
-  'text-shadow',
   'transition',
+  'transform',
   'position',
   'top',
   'bottom',
@@ -66,6 +67,12 @@ export const SAFE_CSS_PROPS = [
   'align-items',
   'align-content',
   'gap',
+  'grid',
+  'grid-template-columns',
+  'grid-template-rows',
+  'grid-gap',
+  'object-fit',
+  'object-position',
 ];
 
 export const SAFE_CSS_PROP_DENY_PREFIXES = ['-webkit-', '-moz-', '-ms-', '-o-'];
@@ -119,8 +126,9 @@ export const SAFE_HTML_TAGS = [
 
 export const SAFE_HTML_ATTRIBUTES = {
   '*': ['style', 'class', 'id'],
+  html: ['lang'],
   a: ['href', 'target', 'rel'],
-  img: ['src', 'alt', 'width', 'height'],
+  img: ['src', 'alt', 'width', 'height', 'loading'],
   meta: ['charset', 'name', 'content', 'viewport'],
   // link удален - внешние ресурсы запрещены
 };
